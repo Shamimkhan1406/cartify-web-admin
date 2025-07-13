@@ -1,3 +1,9 @@
+import 'package:cartify_web/views/side_bar_screens/buyers_screen.dart';
+import 'package:cartify_web/views/side_bar_screens/category_screen.dart';
+import 'package:cartify_web/views/side_bar_screens/orders_screen.dart';
+import 'package:cartify_web/views/side_bar_screens/products_screen.dart';
+import 'package:cartify_web/views/side_bar_screens/upload_banner_screen.dart';
+import 'package:cartify_web/views/side_bar_screens/vendors_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
@@ -10,6 +16,41 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  Widget _selectedScreen = VendorsScreen();
+  _screenSelector(item){
+    switch(item.route) {
+      case VendorsScreen.id:
+        setState(() {
+          _selectedScreen = VendorsScreen();
+        });
+        break;
+      case BuyersScreen.id:
+        setState(() {
+          _selectedScreen = BuyersScreen();
+        });
+        break;
+      case OrdersScreen.id:
+        setState(() {
+          _selectedScreen = OrdersScreen();
+        });
+        break;
+      case CategoryScreen.id:
+        setState(() {
+          _selectedScreen = CategoryScreen();
+        });
+        break;
+      case UploadBannerScreen.id:
+        setState(() {
+          _selectedScreen = UploadBannerScreen();
+        });
+        break;
+      case ProductsScreen.id:
+        setState(() {
+          _selectedScreen = ProductsScreen();
+        });
+        break;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return AdminScaffold(
@@ -18,41 +59,55 @@ class _MainScreenState extends State<MainScreen> {
         title: const Text('Management'),
       ),
       sideBar: SideBar(
+        header: Container(
+          height: 50,
+          width: double.infinity,
+          color: Colors.black26,
+          child: Center(
+            child: Text('Cartify Admin',style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold
+            ),),
+          ),
+        ),
         items: [
           AdminMenuItem(
             title: 'Vendors',
-            route: '',
+            route: VendorsScreen.id,
             icon: CupertinoIcons.person_3,
           ),
           AdminMenuItem(
             title: 'Buyers',
-            route: '',
+            route: BuyersScreen.id,
             icon: CupertinoIcons.person,
           ),
           AdminMenuItem(
               title: 'Orders',
-              route: '',
+              route: OrdersScreen.id,
               icon: CupertinoIcons.cart,
           ),
           AdminMenuItem(
             title: 'Categories',
-            route: '',
+            route: CategoryScreen.id,
             icon: Icons.category_outlined,
           ),
           AdminMenuItem(
             title: 'Upload Banner',
-            route: '',
+            route: UploadBannerScreen.id,
             icon: CupertinoIcons.add,
           ),
           AdminMenuItem(
               title: 'Products',
-              route: '',
+              route: ProductsScreen.id,
               icon: Icons.redeem,
           ),
         ],
         selectedRoute: '',
+        onSelected: (item){
+          _screenSelector(item);
+        },
       ),
-      body: Text('Dashboard'),
+      body: _selectedScreen,
     );
   }
 }
