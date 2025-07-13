@@ -29,7 +29,11 @@ class _MainScreenState extends State<MainScreen> {
             route: '',
             icon: CupertinoIcons.person,
           ),
-          AdminMenuItem(title: 'Orders', route: '', icon: CupertinoIcons.cart),
+          AdminMenuItem(
+              title: 'Orders',
+              route: '',
+              icon: CupertinoIcons.cart,
+          ),
           AdminMenuItem(
             title: 'Categories',
             route: '',
@@ -40,7 +44,11 @@ class _MainScreenState extends State<MainScreen> {
             route: '',
             icon: CupertinoIcons.add,
           ),
-          AdminMenuItem(title: 'Products', route: '', icon: Icons.redeem),
+          AdminMenuItem(
+              title: 'Products',
+              route: '',
+              icon: Icons.redeem,
+          ),
         ],
         selectedRoute: '',
       ),
