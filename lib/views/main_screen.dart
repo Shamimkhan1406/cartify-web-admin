@@ -55,19 +55,26 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return AdminScaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black26,
-        title: const Text('Management'),
+        foregroundColor: Colors.white,
+        backgroundColor: Color(0xff051247),
+        title: const Text('Management',style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Colors.white
+        ),),
       ),
       sideBar: SideBar(
         header: Container(
           height: 50,
           width: double.infinity,
-          color: Colors.black26,
+          color: Colors.black,
           child: Center(
             child: Text('Cartify Admin',style: TextStyle(
               fontSize: 18,
-              fontWeight: FontWeight.bold
-            ),),
+              fontWeight: FontWeight.bold,
+              color: Colors.white
+              ),
+            ),
           ),
         ),
         items: [
