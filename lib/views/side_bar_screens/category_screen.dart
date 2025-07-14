@@ -14,17 +14,31 @@ class _CategoryScreenState extends State<CategoryScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late String categoryName;
   dynamic _image;
+  dynamic _bannerImage;
   pickImage() async {
-    FilePickerResult? result =  await FilePicker.platform.pickFiles(
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.image,
       allowMultiple: false,
     );
-    if (result != null){
+    if (result != null) {
       setState(() {
         _image = result.files.first.bytes;
       });
     }
   }
+
+  pickBannerImage() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: false,
+    );
+    if (result != null) {
+      setState(() {
+        _bannerImage = result.files.first.bytes;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return AdminScaffold(
@@ -42,7 +56,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     alignment: Alignment.topLeft,
                     child: Text(
                       'Categories',
-                      style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -60,7 +77,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Center(
-                        child: _image != null ? Image.memory(_image) : Text('Image'),
+                        child:
+                            _image != null
+                                ? Image.memory(_image)
+                                : Text('Image'),
                       ),
                     ),
                     Padding(
@@ -68,14 +88,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       child: SizedBox(
                         width: 200,
                         child: TextFormField(
-                          onChanged: (value){
+                          onChanged: (value) {
                             categoryName = value;
                           },
-                          validator: (value){
-                            if(value == null || value.isEmpty){
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
                               return 'Please Enter Category Name';
-                            }
-                            else{
+                            } else {
                               return null;
                             }
                           },
@@ -88,29 +107,57 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     TextButton(onPressed: () {}, child: Text('Cancel')),
                     ElevatedButton(
                       onPressed: () {
-                        if(_formKey.currentState!.validate()){
+                        if (_formKey.currentState!.validate()) {
                           print(categoryName);
                         }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xff051247),
                       ),
-                      child: Text('Save', style: TextStyle(color: Colors.white)),
+                      child: Text(
+                        'Save',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ],
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(onPressed: (){
-                    pickImage();
-                  }, child: Text('Upload Image')),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      pickImage();
+                    },
+                    child: Text('Upload Image'),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Divider(
+                  child: Divider(color: Colors.grey),
+                ),
+                Container(
+                  height: 150,
+                  width: 300,
+                  decoration: BoxDecoration(
                     color: Colors.grey,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child:
+                        _bannerImage != null
+                            ? Image.memory(_bannerImage)
+                            : Text('Category banner'),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      pickBannerImage();
+                    },
+                    child: Text('Upload Banner'),
+                  ),
+                ),
+                Divider(color: Colors.grey),
               ],
             ),
           ),
