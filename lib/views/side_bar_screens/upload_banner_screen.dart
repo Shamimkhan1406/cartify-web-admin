@@ -1,9 +1,29 @@
+import 'package:cartify_web/controller/banner_controller.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-class UploadBannerScreen extends StatelessWidget {
+class UploadBannerScreen extends StatefulWidget {
   static const String id = '\banner-screen';
   const UploadBannerScreen({super.key});
 
+  @override
+  State<UploadBannerScreen> createState() => _UploadBannerScreenState();
+}
+
+class _UploadBannerScreenState extends State<UploadBannerScreen> {
+  final BannerController _bannerController = BannerController();
+  dynamic _image;
+  _pickedImage() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: false,
+    );
+    if (result != null) {
+      setState(() {
+        _image = result.files.first.bytes;
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -39,7 +59,7 @@ class UploadBannerScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Center(
-                        child: Text('Image'),
+                        child: _image != null ? Image.memory(_image) : Text('Pick Image'),
                       ),
                     ),
                     
@@ -47,7 +67,10 @@ class UploadBannerScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
                         onPressed: () async {
-                          // Implement save functionality
+                          await _bannerController.uploadBanner(
+                            pickedImage: _image,
+                            context: context,
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xff051247),
@@ -64,9 +87,9 @@ class UploadBannerScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      //;
+                      _pickedImage();
                     },
-                    child: Text('Upload Image'),
+                    child: Text('Pick Image'),
                   ),
                 ),
                 Padding(
