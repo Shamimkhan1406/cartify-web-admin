@@ -1,3 +1,4 @@
+import 'package:cartify_web/controller/category_controller.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
@@ -12,6 +13,7 @@ class CategoryScreen extends StatefulWidget {
 
 class _CategoryScreenState extends State<CategoryScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final CategoryController _categoryController = CategoryController();
   late String categoryName;
   dynamic _image;
   dynamic _bannerImage;
@@ -106,9 +108,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     ),
                     TextButton(onPressed: () {}, child: Text('Cancel')),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          print(categoryName);
+                          _categoryController.uploadCategory(pickedImage: _image, pickedBanner: _bannerImage);
                         }
                       },
                       style: ElevatedButton.styleFrom(
