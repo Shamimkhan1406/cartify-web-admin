@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cartify_web/global_variable.dart';
 import 'package:cartify_web/models/banner.dart';
 import 'package:cartify_web/services/manage_http_response.dart';
@@ -34,5 +36,28 @@ class BannerController {
       
     }
 
+  }
+  // fetch banner
+  Future <List<BannerModel>> loadBanners() async {
+    try {
+      // http get request to fetch banners
+      http.Response response = await http.get(Uri.parse("$uri/api/banner"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        }
+      );
+      print(response.body);
+      if (response.statusCode == 200){
+        List<dynamic> data = jsonDecode(response.body);
+        List <BannerModel> banners = data.map((banner)=>BannerModel.fromMap(banner)).toList();
+        return banners;
+      }
+      else{
+        throw Exception("Failed to load banners");
+      }
+
+    } catch (e) {
+      throw Exception("Error fetching banners: $e");
+    }
   }
 }
