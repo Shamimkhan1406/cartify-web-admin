@@ -49,7 +49,7 @@ class BannerController {
       print(response.body);
       if (response.statusCode == 200){
         List<dynamic> data = jsonDecode(response.body);
-        List <BannerModel> banners = data.map((banner)=>BannerModel.fromMap(banner)).toList();
+        List <BannerModel> banners = data.map((banner)=>BannerModel.fromJson(banner)).toList();
         return banners;
       }
       else{
