@@ -2,6 +2,7 @@ import 'package:cartify_web/views/side_bar_screens/buyers_screen.dart';
 import 'package:cartify_web/views/side_bar_screens/category_screen.dart';
 import 'package:cartify_web/views/side_bar_screens/orders_screen.dart';
 import 'package:cartify_web/views/side_bar_screens/products_screen.dart';
+import 'package:cartify_web/views/side_bar_screens/sub_category_screens.dart';
 import 'package:cartify_web/views/side_bar_screens/upload_banner_screen.dart';
 import 'package:cartify_web/views/side_bar_screens/vendors_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -37,6 +38,11 @@ class _MainScreenState extends State<MainScreen> {
       case CategoryScreen.id:
         setState(() {
           _selectedScreen = CategoryScreen();
+        });
+        break;
+      case SubCategoryScreens.id:
+        setState(() {
+          _selectedScreen = SubCategoryScreens();
         });
         break;
       case UploadBannerScreen.id:
@@ -97,6 +103,11 @@ class _MainScreenState extends State<MainScreen> {
             title: 'Categories',
             route: CategoryScreen.id,
             icon: Icons.category_outlined,
+          ),
+          AdminMenuItem(
+            title: 'Sub Categories',
+            route: SubCategoryScreens.id,
+            icon: Icons.category_rounded,
           ),
           AdminMenuItem(
             title: 'Upload Banner',

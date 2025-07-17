@@ -1,4 +1,5 @@
 import 'package:cartify_web/controller/category_controller.dart';
+import 'package:cartify_web/views/side_bar_screens/widgets/category_widget.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
@@ -160,6 +161,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   ),
                 ),
                 Divider(color: Colors.grey),
+                CategoryWidget(),
               ],
             ),
           ),

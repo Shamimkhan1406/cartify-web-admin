@@ -1,5 +1,5 @@
 import 'package:cartify_web/controller/banner_controller.dart';
-import 'package:cartify_web/views/side_bar_screens/banner_widget.dart';
+import 'package:cartify_web/views/side_bar_screens/widgets/banner_widget.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
