@@ -1,4 +1,5 @@
 import 'package:cartify_web/controller/category_controller.dart';
+import 'package:cartify_web/controller/subcategory_controller.dart';
 import 'package:cartify_web/models/category.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class SubCategoryScreens extends StatefulWidget {
 }
 
 class _SubCategoryScreensState extends State<SubCategoryScreens> {
+  final SubcategoryController _subcategoryController = SubcategoryController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late Future<List<Category>> futureCategories;
@@ -67,6 +69,7 @@ class _SubCategoryScreensState extends State<SubCategoryScreens> {
                   );
                 } else {
                   return DropdownButton<Category>(
+                    value: selectedCategory,
                     hint: Text('Select Category'),
                     items:
                         snapshot.data!.map((Category category) {
@@ -96,7 +99,9 @@ class _SubCategoryScreensState extends State<SubCategoryScreens> {
                   ),
                   child: Center(
                     child:
-                        _image != null ? Image.memory(_image) : Text('SubCategoryImage'),
+                        _image != null
+                            ? Image.memory(_image)
+                            : Text('SubCategoryImage'),
                   ),
                 ),
 
@@ -124,7 +129,18 @@ class _SubCategoryScreensState extends State<SubCategoryScreens> {
                 ElevatedButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      //
+                      await _subcategoryController.uploadSubCategory(
+                        categoryId: selectedCategory!.id,
+                        categoryName: selectedCategory!.name,
+                        pickedImage: _image,
+                        subCategoryName: name,
+                        context: context,
+                      );
+                      setState(() {
+                        _formKey.currentState!.reset();
+                        selectedCategory = null;
+                        _image = null;
+                      });
                     }
                   },
                   style: ElevatedButton.styleFrom(
