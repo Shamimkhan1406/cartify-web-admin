@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cartify_web/global_variable.dart';
 import 'package:cartify_web/models/sub_category.dart';
 import 'package:cartify_web/services/manage_http_response.dart';
@@ -51,6 +53,27 @@ class SubcategoryController {
       );
     } catch (e) {
       print("error: $e");
+    }
+  }
+
+  Future<List<SubCategory>> loadSubCategories() async {
+    try {
+      http.Response response = await http.get(Uri.parse("$uri/api/subcategories"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+      print(response.body);
+      if (response.statusCode == 200) {
+        final List<dynamic> data = jsonDecode(response.body);
+        List<SubCategory> subcategories = data.map((subcategory)=>SubCategory.fromJson(subcategory)).toList();
+        return subcategories;
+      }
+      else {
+        throw Exception("Failed to load Sub Categories");
+      }
+    } catch (e) {
+      throw Exception("Error loading Sub Categories: $e");
     }
   }
 }
