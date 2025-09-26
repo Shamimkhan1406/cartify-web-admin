@@ -1,3 +1,4 @@
+import 'package:cartify_web/views/side_bar_screens/widgets/buyer_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -50,7 +51,9 @@ class BuyersScreen extends StatelessWidget {
                 _rowHeader(2, "Address"),
                 _rowHeader(1, "Delete"),
               ],
-            )
+            ),
+            SizedBox(height: 15,),
+            BuyerWidgets(),
           ],
         ),
       ),

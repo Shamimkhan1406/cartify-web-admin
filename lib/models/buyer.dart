@@ -56,5 +56,5 @@ class Buyer {
   }
   // fromJson: this factory constructor takes a json string and decode into a Map<String, dynamic> object
   // then uses fromMap to convert the map into Buyer object
-  factory Buyer.fromJson(String source) => Buyer.fromMap(json.decode(source) as Map<String, dynamic>);
+  // factory Buyer.fromJson(String source) => Buyer.fromMap(json.decode(source) as Map<String, dynamic>);
 }
