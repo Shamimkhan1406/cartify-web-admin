@@ -8,7 +8,7 @@ class BuyersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget _rowHeader(int flex, String text){
+    Widget rowHeader(int flex, String text){
       return Expanded(
         flex: flex,
         child: Container(
@@ -45,11 +45,11 @@ class BuyersScreen extends StatelessWidget {
             SizedBox(height: 15,),
             Row(
               children: [
-                _rowHeader(1, "Image"),
-                _rowHeader(3, "Full Name"),
-                _rowHeader(2, "Email"),
-                _rowHeader(2, "Address"),
-                _rowHeader(1, "Delete"),
+                rowHeader(1, "Image"),
+                rowHeader(3, "Full Name"),
+                rowHeader(2, "Email"),
+                rowHeader(2, "Address"),
+                rowHeader(1, "Delete"),
               ],
             ),
             SizedBox(height: 15,),
