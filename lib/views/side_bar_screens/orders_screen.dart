@@ -1,3 +1,4 @@
+import 'package:cartify_web/views/side_bar_screens/widgets/order_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -55,7 +56,7 @@ class OrdersScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 15,),
-            
+            OrderWidget(),
           ],
         ),
       ),
